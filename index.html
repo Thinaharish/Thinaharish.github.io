@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Love Story ❤️</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ff4e8a, #ff9a9e);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        /* Floating Hearts */
+        .heart {
+            position: absolute;
+            bottom: -50px;
+            font-size: 20px;
+            animation: float 6s linear infinite;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
+
+        /* Card */
+        .card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 500px;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 25px;
+        }
+
+        button {
+            padding: 12px 25px;
+            margin: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        #yesBtn {
+            background: white;
+            color: #ff4e8a;
+            font-weight: bold;
+        }
+
+        #noBtn {
+            background: #ff1e56;
+            color: white;
+            position: absolute;
+        }
+
+        .page {
+            display: none;
+        }
+
+        img {
+            width: 220px;
+            border-radius: 20px;
+            margin-top: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .message {
+            margin-top: 15px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <audio autoplay loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        for (let i = 0; i < 30; i++) {
+            let heart = document.createElement("div");
+            heart.className = "heart";
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (3 + Math.random() * 5) + "s";
+            heart.style.fontSize = (15 + Math.random() * 25) + "px";
+            document.body.appendChild(heart);
+        }
+    </script>
+
+    <!-- 1️⃣ Welcome Page -->
+    <div class="card page" id="welcomePage" style="display:block;">
+        <h1>Hey My Love 💕</h1>
+        <p>Before anything... I have something special for you 😌</p>
+        <button onclick="nextPage('proposalPage')">Click Here ❤️</button>
+    </div>
+
+    <!-- 2️⃣ Proposal Page -->
+    <div class="card page" id="proposalPage">
+        <h1>Will You Be My Valentine? 💖</h1>
+        <button id="yesBtn">Yes 😍</button>
+        <button id="noBtn">No 😢</button>
+    </div>
+
+    <!-- 3️⃣ Reasons Page -->
+    <div class="card page" id="reasonsPage">
+        <h1>Why I Love You 💕</h1>
+        <p>✨ Your smile brightens my world</p>
+        <p>✨ You support me always</p>
+        <p>✨ You make simple moments magical</p>
+        <p>✨ You are my peace & happiness</p>
+        <button onclick="nextPage('memoryPage')">Next ➡</button>
+    </div>
+
+    <!-- 4️⃣ Memory Page -->
+    <div class="card page" id="memoryPage">
+        <h1>Our Beautiful Memories 📸</h1>
+        <p>From our first chat to today...</p>
+        <p>Every moment with you is special ❤️</p>
+        <button onclick="nextPage('letterPage')">Next ➡</button>
+    </div>
+
+    <!-- 5️⃣ Love Letter Page -->
+    <div class="card page" id="letterPage">
+        <h1>A Letter For You 💌</h1>
+        <div class="message">
+            You came into my life unexpectedly,<br>
+            but you became my most beautiful habit.<br><br>
+            I promise to stand with you,<br>
+            support you, and love you endlessly ❤️
+        </div>
+        <button onclick="nextPage('finalPage')">Final Surprise 🎁</button>
+    </div>
+
+    <!-- 6️⃣ Final Page -->
+    <div class="card page" id="finalPage">
+        <h1>My Forever ❤️</h1>
+        <img src="your-photo.jpg" alt="Couple Photo">
+        <div class="message">
+            I will be with you today,<br>
+            tomorrow and forever baby 💞<br><br>
+            Happy Valentine's Day ❤️
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById("noBtn");
+        const yesBtn = document.getElementById("yesBtn");
+
+        function nextPage(pageId) {
+            document.querySelectorAll(".page").forEach(p => p.style.display = "none");
+            document.getElementById(pageId).style.display = "block";
+        }
+
+        noBtn.addEventListener("mouseover", function () {
+            noBtn.style.top = Math.random() * window.innerHeight + "px";
+            noBtn.style.left = Math.random() * window.innerWidth + "px";
+        });
+
+        yesBtn.addEventListener("click", function () {
+            nextPage("reasonsPage");
+        });
+    </script>
+
+</body>
+
+</html>
