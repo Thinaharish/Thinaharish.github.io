@@ -45,12 +45,12 @@ body{
     position:relative;
     background:rgba(255,255,255,0.15);
     backdrop-filter:blur(15px);
-    padding:30px;
+    padding:40px;
     border-radius:25px;
     box-shadow:0 15px 40px rgba(0,0,0,0.3);
-    width:95%;
-    max-width:420px;
-    animation:fadeIn .6s ease-in-out;
+    width:90%;
+    max-width:500px;
+    animation:fadeIn .8s ease-in-out;
 }
 
 @keyframes fadeIn{
@@ -58,143 +58,133 @@ body{
     to{opacity:1; transform:scale(1);}
 }
 
-h1{margin-bottom:15px; font-size:22px;}
-p{margin-bottom:20px;}
+h1{margin-bottom:20px;}
 
-/* Buttons */
 button{
-    padding:14px 28px;
+    padding:12px 25px;
     margin:10px;
-    font-size:17px;
+    font-size:16px;
     border:none;
-    border-radius:40px;
+    border-radius:30px;
     cursor:pointer;
     transition:.3s;
-    min-width:120px;
 }
 
-/* YES BUTTON */
+button:hover{transform:scale(1.1);}
+
 #yesBtn{
     background:white;
     color:#ff4e8a;
     font-weight:bold;
-    animation:pulse 1.5s infinite;
-    box-shadow:0 0 15px rgba(255,255,255,0.7);
 }
 
-@keyframes pulse{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.1);}
-    100%{transform:scale(1);}
-}
-
-/* NO BUTTON */
 #noBtn{
     background:#ff1e56;
     color:white;
     position:absolute;
 }
 
-/* Click effect */
-button:active{
-    transform:scale(.9);
-}
-
 .page{display:none;}
 
+.message{margin-top:15px;font-size:18px;}
+
+.love-bar{
+    height:20px;
+    width:0%;
+    background:white;
+    border-radius:20px;
+    margin-top:20px;
+    transition:1s;
+}
+
 img{
-    width:200px;
+    width:220px;
     border-radius:20px;
     margin-top:15px;
     box-shadow:0 10px 25px rgba(0,0,0,0.4);
 }
 
-/* Confetti */
 .confetti{
     position:absolute;
-    width:8px;
-    height:8px;
+    width:10px;
+    height:10px;
+    background:white;
     animation:confettiFall 3s linear infinite;
 }
 
 @keyframes confettiFall{
-    0%{transform:translateY(0);}
-    100%{transform:translateY(100vh);}
+    0%{transform:translateY(0) rotate(0);}
+    100%{transform:translateY(100vh) rotate(720deg);}
 }
 </style>
 </head>
 
 <body>
 
+<!-- Floating Hearts -->
 <script>
-/* Floating hearts */
-for(let i=0;i<25;i++){
+for(let i=0;i<30;i++){
     let heart=document.createElement("div");
     heart.className="heart";
     heart.innerHTML="❤️";
     heart.style.left=Math.random()*100+"vw";
     heart.style.animationDuration=(3+Math.random()*5)+"s";
-    heart.style.fontSize=(15+Math.random()*20)+"px";
+    heart.style.fontSize=(15+Math.random()*25)+"px";
     document.body.appendChild(heart);
 }
 </script>
 
-<!-- Slide 1 -->
-<div class="card page" id="slide1" style="display:block;">
+<!-- Welcome -->
+<div class="card page" id="welcomePage" style="display:block;">
 <h1>Hey My Love 💕</h1>
-<p>I made something special for you 😌</p>
-<button onclick="nextPage('slide2')">Next ➡️</button>
-</div>
-
-<!-- Slide 2 -->
-<div class="card page" id="slide2">
-<h1>The Day We Met 💫</h1>
-<p>That was the best day of my life ❤️</p>
-<button onclick="nextPage('slide3')">Next ➡️</button>
-</div>
-
-<!-- Slide 3 -->
-<div class="card page" id="slide3">
-<h1>You Changed Everything 💖</h1>
-<p>Your smile makes my world brighter 🌍✨</p>
-<button onclick="nextPage('slide4')">Next ➡️</button>
-</div>
-
-<!-- Slide 4 -->
-<div class="card page" id="slide4">
-<h1>I Am So Lucky 💞</h1>
-<p>To have someone like you in my life 🥰</p>
-<button onclick="nextPage('proposalPage')">Continue 💘</button>
+<p>I made something special just for you 😌</p>
+<button onclick="nextPage('proposalPage')">Start ❤️</button>
 </div>
 
 <!-- Proposal -->
 <div class="card page" id="proposalPage">
 <h1>Will You Be My Valentine? 💖</h1>
-<button id="yesBtn">YES 😍</button>
-<button id="noBtn">NO 😢</button>
+<button id="yesBtn">Yes 😍</button>
+<button id="noBtn">No 😢</button>
 </div>
 
-<!-- Final Surprise -->
+<!-- Loading Love Meter -->
+<div class="card page" id="loadingPage">
+<h1>Checking Your Love Level... ❤️</h1>
+<div class="love-bar" id="loveBar"></div>
+<p id="loveText" class="message"></p>
+</div>
+
+<!-- Funny Page -->
+<div class="card page" id="funnyPage">
+<h1>See 😏 I Knew It!</h1>
+<p>You can't escape true love 😂</p>
+<button onclick="nextPage('finalPage')">Final Surprise 🎁</button>
+</div>
+
+<!-- Final Page -->
 <div class="card page" id="finalPage">
-<h1>You Said YESSSS 💕</h1>
-<img src="Media.jpg">
-<p>You are stuck with me forever now 😆❤️<br><br>
-Happy Valentine's Day 💖</p>
+<h1>My Forever ❤️</h1>
+<img src="Media.jpg" alt="Couple Photo">
+<div class="message">
+I will love you today,<br>
+tomorrow and forever 💞<br><br>
+Happy Valentine's Day ❤️
+</div>
 </div>
 
 <script>
 const noBtn=document.getElementById("noBtn");
 const yesBtn=document.getElementById("yesBtn");
-let yesSize=1;
+let yesScale=1;
 
-/* Page switch */
 function nextPage(id){
     document.querySelectorAll(".page").forEach(p=>p.style.display="none");
     document.getElementById(id).style.display="block";
 }
 
-/* Move No button on CLICK (mobile friendly) */
-function moveNo(){
+/* Funny No Button */
+noBtn.addEventListener("mouseenter",function(){
     const card=document.getElementById("proposalPage");
     const maxX=card.clientWidth-noBtn.offsetWidth;
     const maxY=card.clientHeight-noBtn.offsetHeight;
@@ -202,38 +192,35 @@ function moveNo(){
     noBtn.style.left=Math.random()*maxX+"px";
     noBtn.style.top=Math.random()*maxY+"px";
 
-    yesSize+=0.15;
-    yesBtn.style.transform="scale("+yesSize+")";
-
-    if(navigator.vibrate){
-        navigator.vibrate(100);
-    }
-}
-
-noBtn.addEventListener("click",moveNo);
-noBtn.addEventListener("touchstart",moveNo);
-
-/* YES Click */
-yesBtn.addEventListener("click",function(){
-    createConfetti();
-    if(navigator.vibrate){
-        navigator.vibrate([100,50,100]);
-    }
-    nextPage("finalPage");
+    yesScale+=0.2;
+    yesBtn.style.transform="scale("+yesScale+")";
 });
 
-/* Confetti effect */
+/* Yes Click */
+yesBtn.addEventListener("click",function(){
+    nextPage("loadingPage");
+
+    let bar=document.getElementById("loveBar");
+    let text=document.getElementById("loveText");
+
+    setTimeout(()=>{bar.style.width="30%"; text.innerHTML="Analyzing feelings...";},500);
+    setTimeout(()=>{bar.style.width="60%"; text.innerHTML="Calculating romance level...";},1500);
+    setTimeout(()=>{bar.style.width="100%"; text.innerHTML="Love Level: 1000% 💖";},2500);
+    setTimeout(()=>{nextPage("funnyPage");},4000);
+});
+
+/* Confetti */
 function createConfetti(){
-    for(let i=0;i<40;i++){
+    for(let i=0;i<50;i++){
         let conf=document.createElement("div");
         conf.className="confetti";
         conf.style.left=Math.random()*100+"vw";
-        conf.style.top="0px";
         conf.style.background=["#fff","#ff4e8a","#ff9a9e"][Math.floor(Math.random()*3)];
-        conf.style.animationDuration=(2+Math.random()*2)+"s";
+        conf.style.animationDuration=(2+Math.random()*3)+"s";
         document.body.appendChild(conf);
     }
 }
+yesBtn.addEventListener("click",createConfetti);
 </script>
 
 </body>
