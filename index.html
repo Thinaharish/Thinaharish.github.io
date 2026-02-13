@@ -40,7 +40,6 @@
             0% {
                 transform: translateY(0) rotate(0deg);
             }
-
             100% {
                 transform: translateY(-100vh) rotate(360deg);
             }
@@ -48,6 +47,7 @@
 
         /* Card */
         .card {
+            position: relative; /* Important for moving button */
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(15px);
             padding: 40px;
@@ -63,7 +63,6 @@
                 opacity: 0;
                 transform: scale(0.9);
             }
-
             to {
                 opacity: 1;
                 transform: scale(1);
@@ -137,21 +136,21 @@
         }
     </script>
 
-    <!-- 1️⃣ Welcome Page -->
+    <!-- Welcome Page -->
     <div class="card page" id="welcomePage" style="display:block;">
         <h1>Hey My Love 💕</h1>
         <p>Before anything... I have something special for you 😌</p>
         <button onclick="nextPage('proposalPage')">Click Here ❤️</button>
     </div>
 
-    <!-- 2️⃣ Proposal Page -->
+    <!-- Proposal Page -->
     <div class="card page" id="proposalPage">
         <h1>Will You Be My Valentine? 💖</h1>
         <button id="yesBtn">Yes 😍</button>
         <button id="noBtn">No 😢</button>
     </div>
 
-    <!-- 3️⃣ Reasons Page -->
+    <!-- Reasons Page -->
     <div class="card page" id="reasonsPage">
         <h1>Why I Love You 💕</h1>
         <p>✨ Your smile brightens my world</p>
@@ -161,7 +160,7 @@
         <button onclick="nextPage('memoryPage')">Next ➡</button>
     </div>
 
-    <!-- 4️⃣ Memory Page -->
+    <!-- Memory Page -->
     <div class="card page" id="memoryPage">
         <h1>Our Beautiful Memories 📸</h1>
         <p>From our first chat to today...</p>
@@ -169,7 +168,7 @@
         <button onclick="nextPage('letterPage')">Next ➡</button>
     </div>
 
-    <!-- 5️⃣ Love Letter Page -->
+    <!-- Love Letter Page -->
     <div class="card page" id="letterPage">
         <h1>A Letter For You 💌</h1>
         <div class="message">
@@ -181,7 +180,7 @@
         <button onclick="nextPage('finalPage')">Final Surprise 🎁</button>
     </div>
 
-    <!-- 6️⃣ Final Page -->
+    <!-- Final Page -->
     <div class="card page" id="finalPage">
         <h1>My Forever ❤️</h1>
         <img src="your-photo.jpg" alt="Couple Photo">
@@ -201,9 +200,17 @@
             document.getElementById(pageId).style.display = "block";
         }
 
-        noBtn.addEventListener("mouseover", function () {
-            noBtn.style.top = Math.random() * window.innerHeight + "px";
-            noBtn.style.left = Math.random() * window.innerWidth + "px";
+        noBtn.addEventListener("mouseenter", function () {
+            const card = document.getElementById("proposalPage");
+
+            const maxX = card.clientWidth - noBtn.offsetWidth;
+            const maxY = card.clientHeight - noBtn.offsetHeight;
+
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+
+            noBtn.style.left = randomX + "px";
+            noBtn.style.top = randomY + "px";
         });
 
         yesBtn.addEventListener("click", function () {
