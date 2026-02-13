@@ -45,7 +45,7 @@ body{
     position:relative;
     background:rgba(255,255,255,0.15);
     backdrop-filter:blur(15px);
-    padding:35px;
+    padding:30px;
     border-radius:25px;
     box-shadow:0 15px 40px rgba(0,0,0,0.3);
     width:95%;
@@ -58,13 +58,14 @@ body{
     to{opacity:1; transform:scale(1);}
 }
 
-h1{margin-bottom:20px; font-size:22px;}
+h1{margin-bottom:15px; font-size:22px;}
+p{margin-bottom:20px;}
 
 /* Buttons */
 button{
     padding:14px 28px;
-    margin:12px;
-    font-size:18px;
+    margin:10px;
+    font-size:17px;
     border:none;
     border-radius:40px;
     cursor:pointer;
@@ -92,17 +93,14 @@ button{
     background:#ff1e56;
     color:white;
     position:absolute;
-    transition:.2s;
 }
 
-/* Button bounce click */
+/* Click effect */
 button:active{
     transform:scale(.9);
 }
 
 .page{display:none;}
-
-.message{margin-top:15px;font-size:16px;}
 
 img{
     width:200px;
@@ -129,6 +127,7 @@ img{
 <body>
 
 <script>
+/* Floating hearts */
 for(let i=0;i<25;i++){
     let heart=document.createElement("div");
     heart.className="heart";
@@ -140,25 +139,47 @@ for(let i=0;i<25;i++){
 }
 </script>
 
-<div class="card page" id="welcomePage" style="display:block;">
+<!-- Slide 1 -->
+<div class="card page" id="slide1" style="display:block;">
 <h1>Hey My Love 💕</h1>
-<p>I built something cute for you 😌</p>
-<button onclick="nextPage('proposalPage')">Open ❤️</button>
+<p>I made something special for you 😌</p>
+<button onclick="nextPage('slide2')">Next ➡️</button>
 </div>
 
+<!-- Slide 2 -->
+<div class="card page" id="slide2">
+<h1>The Day We Met 💫</h1>
+<p>That was the best day of my life ❤️</p>
+<button onclick="nextPage('slide3')">Next ➡️</button>
+</div>
+
+<!-- Slide 3 -->
+<div class="card page" id="slide3">
+<h1>You Changed Everything 💖</h1>
+<p>Your smile makes my world brighter 🌍✨</p>
+<button onclick="nextPage('slide4')">Next ➡️</button>
+</div>
+
+<!-- Slide 4 -->
+<div class="card page" id="slide4">
+<h1>I Am So Lucky 💞</h1>
+<p>To have someone like you in my life 🥰</p>
+<button onclick="nextPage('proposalPage')">Continue 💘</button>
+</div>
+
+<!-- Proposal -->
 <div class="card page" id="proposalPage">
 <h1>Will You Be My Valentine? 💖</h1>
 <button id="yesBtn">YES 😍</button>
 <button id="noBtn">NO 😢</button>
 </div>
 
+<!-- Final Surprise -->
 <div class="card page" id="finalPage">
 <h1>You Said YESSSS 💕</h1>
 <img src="Media.jpg">
-<div class="message">
-You are stuck with me forever now 😆❤️<br><br>
-Happy Valentine's Day 💖
-</div>
+<p>You are stuck with me forever now 😆❤️<br><br>
+Happy Valentine's Day 💖</p>
 </div>
 
 <script>
