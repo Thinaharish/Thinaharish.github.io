@@ -1,227 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Love Story ❤️</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Love Story ❤️</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-body{
-    height:100vh;
-    overflow:hidden;
-    background:linear-gradient(135deg,#ff4e8a,#ff9a9e);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    color:white;
-}
+        body {
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ff4e8a, #ff9a9e);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
 
-/* Floating Hearts */
-.heart{
-    position:absolute;
-    bottom:-50px;
-    font-size:20px;
-    animation:float 6s linear infinite;
-    color:rgba(255,255,255,0.7);
-}
+        /* Floating Hearts */
+        .heart {
+            position: absolute;
+            bottom: -50px;
+            font-size: 20px;
+            animation: float 6s linear infinite;
+            color: rgba(255, 255, 255, 0.7);
+        }
 
-@keyframes float{
-    0%{transform:translateY(0) rotate(0deg);}
-    100%{transform:translateY(-100vh) rotate(360deg);}
-}
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
 
-/* Card */
-.card{
-    position:relative;
-    background:rgba(255,255,255,0.15);
-    backdrop-filter:blur(15px);
-    padding:40px;
-    border-radius:25px;
-    box-shadow:0 15px 40px rgba(0,0,0,0.3);
-    width:90%;
-    max-width:500px;
-    animation:fadeIn .8s ease-in-out;
-}
+        /* Card */
+        .card {
+            position: relative; /* Important for moving button */
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 500px;
+            animation: fadeIn 0.8s ease-in-out;
+        }
 
-@keyframes fadeIn{
-    from{opacity:0; transform:scale(.9);}
-    to{opacity:1; transform:scale(1);}
-}
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
 
-h1{margin-bottom:20px;}
+        h1 {
+            font-size: 28px;
+            margin-bottom: 25px;
+        }
 
-button{
-    padding:12px 25px;
-    margin:10px;
-    font-size:16px;
-    border:none;
-    border-radius:30px;
-    cursor:pointer;
-    transition:.3s;
-}
+        button {
+            padding: 12px 25px;
+            margin: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
 
-button:hover{transform:scale(1.1);}
+        button:hover {
+            transform: scale(1.1);
+        }
 
-#yesBtn{
-    background:white;
-    color:#ff4e8a;
-    font-weight:bold;
-}
+        #yesBtn {
+            background: white;
+            color: #ff4e8a;
+            font-weight: bold;
+        }
 
-#noBtn{
-    background:#ff1e56;
-    color:white;
-    position:absolute;
-}
+        #noBtn {
+            background: #ff1e56;
+            color: white;
+            position: absolute;
+        }
 
-.page{display:none;}
+        .page {
+            display: none;
+        }
 
-.message{margin-top:15px;font-size:18px;}
+        img {
+            width: 220px;
+            border-radius: 20px;
+            margin-top: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
 
-.love-bar{
-    height:20px;
-    width:0%;
-    background:white;
-    border-radius:20px;
-    margin-top:20px;
-    transition:1s;
-}
-
-img{
-    width:220px;
-    border-radius:20px;
-    margin-top:15px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.4);
-}
-
-.confetti{
-    position:absolute;
-    width:10px;
-    height:10px;
-    background:white;
-    animation:confettiFall 3s linear infinite;
-}
-
-@keyframes confettiFall{
-    0%{transform:translateY(0) rotate(0);}
-    100%{transform:translateY(100vh) rotate(720deg);}
-}
-</style>
+        .message {
+            margin-top: 15px;
+            font-size: 18px;
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- Floating Hearts -->
-<script>
-for(let i=0;i<30;i++){
-    let heart=document.createElement("div");
-    heart.className="heart";
-    heart.innerHTML="❤️";
-    heart.style.left=Math.random()*100+"vw";
-    heart.style.animationDuration=(3+Math.random()*5)+"s";
-    heart.style.fontSize=(15+Math.random()*25)+"px";
-    document.body.appendChild(heart);
-}
-</script>
+    <audio autoplay loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
 
-<!-- Welcome -->
-<div class="card page" id="welcomePage" style="display:block;">
-<h1>Hey My Love 💕</h1>
-<p>I made something special just for you 😌</p>
-<button onclick="nextPage('proposalPage')">Start ❤️</button>
-</div>
+    <script>
+        for (let i = 0; i < 30; i++) {
+            let heart = document.createElement("div");
+            heart.className = "heart";
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (3 + Math.random() * 5) + "s";
+            heart.style.fontSize = (15 + Math.random() * 25) + "px";
+            document.body.appendChild(heart);
+        }
+    </script>
 
-<!-- Proposal -->
-<div class="card page" id="proposalPage">
-<h1>Will You Be My Valentine? 💖</h1>
-<button id="yesBtn">Yes 😍</button>
-<button id="noBtn">No 😢</button>
-</div>
+    <!-- Welcome Page -->
+    <div class="card page" id="welcomePage" style="display:block;">
+        <h1>Hey My Love 💕</h1>
+        <p>Before anything... I have something special for you 😌</p>
+        <button onclick="nextPage('proposalPage')">Click Here ❤️</button>
+    </div>
 
-<!-- Loading Love Meter -->
-<div class="card page" id="loadingPage">
-<h1>Checking Your Love Level... ❤️</h1>
-<div class="love-bar" id="loveBar"></div>
-<p id="loveText" class="message"></p>
-</div>
+    <!-- Proposal Page -->
+    <div class="card page" id="proposalPage">
+        <h1>Will You Be My Valentine? 💖</h1>
+        <button id="yesBtn">Yes 😍</button>
+        <button id="noBtn">No 😢</button>
+    </div>
 
-<!-- Funny Page -->
-<div class="card page" id="funnyPage">
-<h1>See 😏 I Knew It!</h1>
-<p>You can't escape true love 😂</p>
-<button onclick="nextPage('finalPage')">Final Surprise 🎁</button>
-</div>
+    <!-- Reasons Page -->
+    <div class="card page" id="reasonsPage">
+        <h1>Why I Love You 💕</h1>
+        <p>✨ Your smile brightens my world</p>
+        <p>✨ You support me always</p>
+        <p>✨ You make simple moments magical</p>
+        <p>✨ You are my peace & happiness</p>
+        <button onclick="nextPage('memoryPage')">Next ➡</button>
+    </div>
 
-<!-- Final Page -->
-<div class="card page" id="finalPage">
-<h1>My Forever ❤️</h1>
-<img src="Media.jpg" alt="Couple Photo">
-<div class="message">
-I will love you today,<br>
-tomorrow and forever 💞<br><br>
-Happy Valentine's Day ❤️
-</div>
-</div>
+    <!-- Memory Page -->
+    <div class="card page" id="memoryPage">
+        <h1>Our Beautiful Memories 📸</h1>
+        <p>From our first chat to today...</p>
+        <p>Every moment with you is special ❤️</p>
+        <button onclick="nextPage('letterPage')">Next ➡</button>
+    </div>
 
-<script>
-const noBtn=document.getElementById("noBtn");
-const yesBtn=document.getElementById("yesBtn");
-let yesScale=1;
+    <!-- Love Letter Page -->
+    <div class="card page" id="letterPage">
+        <h1>A Letter For You 💌</h1>
+        <div class="message">
+            You came into my life unexpectedly,<br>
+            but you became my most beautiful habit.<br><br>
+            I promise to stand with you,<br>
+            support you, and love you endlessly ❤️
+        </div>
+        <button onclick="nextPage('finalPage')">Final Surprise 🎁</button>
+    </div>
 
-function nextPage(id){
-    document.querySelectorAll(".page").forEach(p=>p.style.display="none");
-    document.getElementById(id).style.display="block";
-}
+    <!-- Final Page -->
+    <div class="card page" id="finalPage">
+        <h1>My Forever ❤️</h1>
+        <img src="your-photo.jpg" alt="Couple Photo">
+        <div class="message">
+            I will be with you today,<br>
+            tomorrow and forever baby 💞<br><br>
+            Happy Valentine's Day ❤️
+        </div>
+    </div>
 
-/* Funny No Button */
-noBtn.addEventListener("mouseenter",function(){
-    const card=document.getElementById("proposalPage");
-    const maxX=card.clientWidth-noBtn.offsetWidth;
-    const maxY=card.clientHeight-noBtn.offsetHeight;
+    <script>
+        const noBtn = document.getElementById("noBtn");
+        const yesBtn = document.getElementById("yesBtn");
 
-    noBtn.style.left=Math.random()*maxX+"px";
-    noBtn.style.top=Math.random()*maxY+"px";
+        function nextPage(pageId) {
+            document.querySelectorAll(".page").forEach(p => p.style.display = "none");
+            document.getElementById(pageId).style.display = "block";
+        }
 
-    yesScale+=0.2;
-    yesBtn.style.transform="scale("+yesScale+")";
-});
+        noBtn.addEventListener("mouseenter", function () {
+            const card = document.getElementById("proposalPage");
 
-/* Yes Click */
-yesBtn.addEventListener("click",function(){
-    nextPage("loadingPage");
+            const maxX = card.clientWidth - noBtn.offsetWidth;
+            const maxY = card.clientHeight - noBtn.offsetHeight;
 
-    let bar=document.getElementById("loveBar");
-    let text=document.getElementById("loveText");
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
 
-    setTimeout(()=>{bar.style.width="30%"; text.innerHTML="Analyzing feelings...";},500);
-    setTimeout(()=>{bar.style.width="60%"; text.innerHTML="Calculating romance level...";},1500);
-    setTimeout(()=>{bar.style.width="100%"; text.innerHTML="Love Level: 1000% 💖";},2500);
-    setTimeout(()=>{nextPage("funnyPage");},4000);
-});
+            noBtn.style.left = randomX + "px";
+            noBtn.style.top = randomY + "px";
+        });
 
-/* Confetti */
-function createConfetti(){
-    for(let i=0;i<50;i++){
-        let conf=document.createElement("div");
-        conf.className="confetti";
-        conf.style.left=Math.random()*100+"vw";
-        conf.style.background=["#fff","#ff4e8a","#ff9a9e"][Math.floor(Math.random()*3)];
-        conf.style.animationDuration=(2+Math.random()*3)+"s";
-        document.body.appendChild(conf);
-    }
-}
-yesBtn.addEventListener("click",createConfetti);
-</script>
+        yesBtn.addEventListener("click", function () {
+            nextPage("reasonsPage");
+        });
+    </script>
 
 </body>
+
 </html>
